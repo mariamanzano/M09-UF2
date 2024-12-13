@@ -3,12 +3,26 @@ public class Principal {
         Fil Juan = new Fil("Juan");
         Fil Pepe = new Fil("Pepe");
 
-        Juan.setPriority(Thread.MIN_PRIORITY);
-        Pepe.setPriority(Thread.MAX_PRIORITY);
-
         Juan.start();
-        Pepe.start();
 
         System.out.println("Termina thread main");
+
+        try {
+            Juan.join();
+        } catch (InterruptedException e) {
+            System.out.println("Error " + e);
+        }
+
+        Pepe.start();
+
+        try {
+            Pepe.join();
+        } catch (InterruptedException e) {
+            System.out.println("Error " + e);
+        }
+
+        System.out.println("Termina el fil Juan");
+        System.out.println("Termina el fil Pepe");
+
     }
 }

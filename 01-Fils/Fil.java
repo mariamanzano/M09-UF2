@@ -12,9 +12,8 @@ public class Fil extends Thread {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                System.err.println("Error al fil " + nom);
+                System.out.println("Error " + e);
             }
         }
-        System.out.println("Termina el fil " + nom);
     }
 }
