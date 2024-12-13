@@ -38,7 +38,7 @@ public class Fil extends Thread {
 ```
 La classe Fil extendrà la classe Threads, on hi estarà l’atribut nom i el constructor de la classe.  Sobreescriurà el mètode run per definir el comportament del Fil i la seva lògica.
 ## Resultat del Comportament 1:
-
+![alt text](image.png)
 
 ## Comportament 2
 ```java
@@ -69,6 +69,7 @@ En el comportament 2, primer s’iniciarà el fil Juan, després mostrarà que e
 Més tard s’iniciarà el fil Pepe i s'aturarà també amb el join().
 Per acabar es mostraran els missatges dels dos Fils.
 ## Resultat del Comportament 2:
+![alt text](image-1.png)
 ## Comportament 3
 ```java
 public class Principal {
@@ -90,3 +91,4 @@ public class Principal {
 Al comportament 3 s’iniciaran els dos Fils Juan i Pepe amb el metode strat(). Tot seguit es mostrarà que el fil principal ha acabat. Per acabar, s’aturan els dos fils amb el metode join();
 ## Resultat del Comportament 3
 
+![alt text](image-2.png)
