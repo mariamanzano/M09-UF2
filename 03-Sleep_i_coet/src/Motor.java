@@ -4,7 +4,7 @@ public class Motor extends Thread {
     private int id;
 
     public Motor(int id) {
-        this.id = id;
+        this.id = id;  // Inicialitzem el id
     }
 
     public int getPotenciaObj() {
@@ -31,6 +31,7 @@ public class Motor extends Thread {
             System.out.printf("Motor %d: Aturat. Objectiu: 0 Actual: %d\n", id, potenciaAct);
             return;
         }
+
         this.potenciaObj = p;
         start();
     }
@@ -53,5 +54,6 @@ public class Motor extends Thread {
                 e.printStackTrace();
             }
         }
+        System.out.printf("Motor %d: FerRes. Objectiu: %d Actual: %d\n", id, potenciaObj, potenciaAct);
     }
 }
