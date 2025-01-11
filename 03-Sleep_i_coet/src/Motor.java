@@ -4,7 +4,7 @@ public class Motor extends Thread {
     private int id;
 
     public Motor(int id) {
-        this.id = id;  // Inicialitzem el id
+        this.id = id;
     }
 
     public int getPotenciaObj() {
@@ -28,7 +28,6 @@ public class Motor extends Thread {
                     e.printStackTrace();
                 }
             }
-            System.out.printf("Motor %d: Aturat. Objectiu: 0 Actual: %d\n", id, potenciaAct);
             return;
         }
 
@@ -41,10 +40,15 @@ public class Motor extends Thread {
         while (potenciaAct != potenciaObj) {
             if (potenciaAct < potenciaObj) {
                 potenciaAct++;
-                System.out.printf("Motor %d: Incre. Objectiu: %d Actual: %d\n", id, potenciaObj, potenciaAct);
+                if (potenciaAct != potenciaObj) {
+                    System.out.printf("Motor %d: Incre. Objectiu: %d Actual: %d\n", id, potenciaObj, potenciaAct);
+
+                }
             } else {
+                if (potenciaAct != potenciaObj) {
+                    System.out.printf("Motor %d: Decre. Objectiu: %d Actual: %d\n", id, potenciaObj, potenciaAct);
+                }
                 potenciaAct--;
-                System.out.printf("Motor %d: Decre. Objectiu: %d Actual: %d\n", id, potenciaObj, potenciaAct);
             }
 
             try {
