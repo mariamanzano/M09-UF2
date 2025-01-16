@@ -27,6 +27,12 @@ public class Coet {
         }
     }
 
+    public void arrenca() {
+        for (int i = 0; i < motors.length; i++) {
+            motors[i].start();
+        }
+    }
+
     public static void main(String[] args) {
         Coet coet = new Coet();
         int potencia = -1;
