@@ -23,23 +23,24 @@ public class Treballador extends Thread {
         this.nou_anual_brut = nou_anual_brut;
         this.edat_inici_treball = edat_inici_treball;
         this.edat_final_treball = edat_final_treball;
-        this.edat_actual = 0;
+        this.edat_actual = edat_actual;
         this.cobrat = 0.0f;
         this.rnd = new Random(); 
     }
 
     public void cobra() {
-        cobrat +=  nou_anual_brut / 12.0f;
-        pagaImpostos();
+        float souMensual = nou_anual_brut / 12.0f;
+        cobrat += souMensual;
+        pagaImpostos(souMensual);
         try {
             Thread.sleep(rnd.nextInt(100));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
-    public void pagaImpostos() {
-        cobrat -= (nou_anual_brut / 12.0f) * 0.24f;
+    
+    public void pagaImpostos(float souMensual) {
+        cobrat -= souMensual * 0.24f;
         try {
             Thread.sleep(rnd.nextInt(100));
         } catch (InterruptedException e) {
@@ -50,8 +51,10 @@ public class Treballador extends Thread {
     @Override
     public void run() {
         while (edat_actual < edat_final_treball) {
-            cobra();
-            edat_actual++;  
+            if (edat_actual >= edat_inici_treball) {
+                cobra();
+            }
+            edat_actual++; 
         }
-    }
+    }    
 }
