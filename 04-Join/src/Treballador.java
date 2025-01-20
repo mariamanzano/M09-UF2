@@ -50,11 +50,10 @@ public class Treballador extends Thread {
 
     @Override
     public void run() {
-        while (edat_actual < edat_final_treball) {
-            if (edat_actual >= edat_inici_treball) {
-                cobra();
-            }
-            edat_actual++; 
+        int totalMes = (edat_final_treball - edat_inici_treball)*12;
+        for (int i = 0; i < totalMes; i++) {
+            cobra();
         }
+        edat_actual = edat_inici_treball + (totalMes / 12);
     }    
 }
