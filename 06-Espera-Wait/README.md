@@ -55,4 +55,4 @@ Perque els fils entren en wait() quan no hi ha places disponibles, i com que mai
 
 
 ### 3. Perquè creus que fa falta la llista i no valdria només amb una variable sencera de reserves? 
-
+Fa falta una llista perquè permet saber qui ha fet la reserva i assegurar que només cancel·lin els assistents que realment en tenen una.
