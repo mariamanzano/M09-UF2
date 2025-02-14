@@ -15,24 +15,28 @@ public class Filosofs extends Thread {
 
     public boolean agafarForquilles() throws InterruptedException {
         while (true) {
-            if (agafarForquillaEsquerra() && agafarForquillaDreta()) {
+            if (agafaForquillaEsquerra() && agafaForquillaDreta()) {
                 return true;
             } else {
                 forquillaEsquerra.deixar();
                 gana++;
                 System.out.printf("%s té gana (%d). Esperant...%n", getName(), gana);
-                Thread.sleep(random.nextInt(500) + 500)
+                Thread.sleep(random.nextInt(500) + 500);
             }
         }
     }
+    
 
     public boolean agafaForquillaEsquerra() throws InterruptedException {
-        return forquillaEsquerra.agafar();
+        int idFilosof = Integer.parseInt(getName().replace("Comensal", ""));
+        return forquillaEsquerra.agafar(idFilosof);
     }
-
+    
     public boolean agafaForquillaDreta() throws InterruptedException {
-        return forquillaDreta.agafar();
+        int idFilosof = Integer.parseInt(getName().replace("Comensal", ""));
+        return forquillaDreta.agafar(idFilosof);
     }
+    
 
     public void deixarForquilles() {
         System.out.printf("%s deixa les forquilles %d i %d%n", getName(), forquillaEsquerra.getNum(), forquillaDreta.getNum());
