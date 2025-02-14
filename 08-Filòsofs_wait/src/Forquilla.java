@@ -1,7 +1,6 @@
 public class Forquilla {
     private int propietari;
     private final int num;
-    private final Object monitor = new Object();
 
     public static final int LLIURE = -1;
 
@@ -10,23 +9,19 @@ public class Forquilla {
         this.propietari = LLIURE;
     }
 
-    public boolean agafar(int idFilosof) throws InterruptedException {
-        synchronized (monitor) {
-            while (propietari != LLIURE) {
-                monitor.wait();
-            }
-            propietari = idFilosof;
-            System.out.printf("Filòsof %d agafa la forquilla %d%n", idFilosof, num);
-            return true;
+    public synchronized boolean agafar(int idFilosof) throws InterruptedException {
+        while (propietari != LLIURE) {
+            wait();
         }
+        propietari = idFilosof;
+        System.out.printf("Filòsof %d agafa la forquilla %d%n", idFilosof, num);
+        return true;
     }
 
-    public void deixar() {
-        synchronized (monitor) {
-            propietari = LLIURE;
-            monitor.notifyAll();
-            System.out.printf("Filòsof %d deixa la forquilla %d%n", propietari, num);
-        }
+    public synchronized void deixar() {
+        System.out.printf("Filòsof %d deixa la forquilla %d%n", propietari, num);
+        propietari = LLIURE;
+        notifyAll();
     }
 
     public int getNum() {
