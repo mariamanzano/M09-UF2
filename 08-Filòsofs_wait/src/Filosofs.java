@@ -14,16 +14,17 @@ public class Filosofs extends Thread {
     }
 
     public boolean agafarForquilles() throws InterruptedException {
-        while (true) {
+        int idFilosof = Integer.parseInt(getName().replace("Comensal", ""));
+        if (idFilosof % 2 == 0) {
             if (agafaForquillaEsquerra() && agafaForquillaDreta()) {
                 return true;
-            } else {
-                forquillaEsquerra.deixar();
-                gana++;
-                System.out.printf("%s té gana (%d). Esperant...%n", getName(), gana);
-                Thread.sleep(random.nextInt(500) + 500);
+            }
+        } else {
+            if (agafaForquillaDreta() && agafaForquillaEsquerra()) {
+                return true;
             }
         }
+        return false;
     }
     
 
