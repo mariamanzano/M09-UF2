@@ -15,19 +15,32 @@ public class Filosofs extends Thread {
 
     public boolean agafarForquilles() throws InterruptedException {
         int idFilosof = Integer.parseInt(getName().replace("Comensal", ""));
-        if (idFilosof % 2 == 0) {
-            if (agafaForquillaEsquerra() && agafaForquillaDreta()) {
-                return true;
+        
+        while (true) {
+            if (idFilosof % 2 == 0) {
+                if (agafaForquillaEsquerra()) {
+                    if (agafaForquillaDreta()) {
+                        return true;
+                    } else {
+                        forquillaEsquerra.deixar();
+                    }
+                }
+            } else {
+                if (agafaForquillaDreta()) {
+                    if (agafaForquillaEsquerra()) {
+                        return true;
+                    } else {
+                        forquillaDreta.deixar();
+                    }
+                }
             }
-        } else {
-            if (agafaForquillaDreta() && agafaForquillaEsquerra()) {
-                return true;
-            }
+
+            gana++;
+            System.out.printf("%s té gana (%d). Esperant...%n", getName(), gana);
+            Thread.sleep(random.nextInt(500) + 500);
         }
-        return false;
     }
     
-
     public boolean agafaForquillaEsquerra() throws InterruptedException {
         int idFilosof = Integer.parseInt(getName().replace("Comensal", ""));
         return forquillaEsquerra.agafar(idFilosof);
@@ -47,11 +60,16 @@ public class Filosofs extends Thread {
 
     public void menja() {
         try {
-            agafarForquilles();
-            System.out.printf("%s menja%n", getName());
-            Thread.sleep(random.nextInt(1000) + 1000);
-            System.out.printf("%s ha acabat de menjar%n", getName());
-            deixarForquilles();
+            if (!agafarForquilles()) {
+                gana++;
+                System.out.printf("%s té gana (%d). Esperant...%n", getName(), gana);
+                Thread.sleep(random.nextInt(500) + 500);
+            } else {
+                System.out.printf("%s menja%n", getName());
+                Thread.sleep(random.nextInt(1000) + 1000);
+                System.out.printf("%s ha acabat de menjar%n", getName());
+                deixarForquilles();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
