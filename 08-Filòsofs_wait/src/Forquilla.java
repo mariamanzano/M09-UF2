@@ -9,18 +9,17 @@ public class Forquilla {
         this.propietari = LLIURE;
     }
 
-    public synchronized boolean agafar(int idFilosof) throws InterruptedException {
-        while (propietari != LLIURE) {
+    public synchronized void agafar(int idFilosof) throws InterruptedException {
+        while (this.propietari != LLIURE) {
             wait();
         }
-        propietari = idFilosof;
+        this.propietari = idFilosof;
         System.out.printf("Filòsof %d agafa la forquilla %d%n", idFilosof, num);
-        return true;
     }
 
     public synchronized void deixar() {
         System.out.printf("Filòsof %d deixa la forquilla %d%n", propietari, num);
-        propietari = LLIURE;
+        this.propietari = LLIURE;
         notifyAll();
     }
 
